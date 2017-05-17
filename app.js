@@ -19,5 +19,5 @@ app.use(function *(next) {
   yield next
 })
 
-app.listen(3001)
-console.log('localhost:3001')
+app.listen(3000)
+console.log('localhost:3000')
