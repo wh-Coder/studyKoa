@@ -14,7 +14,7 @@ module.exports = () => {
   router.get('/u/test', User.test)
 
   // user
-  router.post('/u/signup', User.signup)
+  router.get('/u/signup', User.signup)
   router.post('/u/verify', User.verify)
   router.post('/u/update', User.update)
 

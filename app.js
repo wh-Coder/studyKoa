@@ -1,6 +1,13 @@
 /**
  * Created by Administrator on 2017-05-17.
  */
+const mongoose = require('mongoose')
+const db = 'mongodb://localhost/koa'
+mongoose.Promise = require('bluebird')
+mongoose.connect(db)
+require('./models/user')
+// require('./app/models/user')
+
 const koa = require('koa')
 const session = require('koa-session')
 const logger = require('koa-logger')
