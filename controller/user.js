@@ -14,17 +14,16 @@ exports.test = (ctx) => {
 }
 
 exports.signup = async (ctx, next) => {
-  const phoneNumber = ctx.request.body.phoneNumber
-  // const phoneNumber = ctx.query.phoneNumber
-  console.log(phoneNumber)
-  var user = await User.findOne({
+  const phoneNumber = xss(ctx.request.body.phoneNumber.trim())
+
+  let user = await User.findOne({
     phoneNumber: phoneNumber
   }).exec()
 
-  var verifyCode = sms.getCode()
+  const verifyCode = sms.getCode()
 
   if (!user) {
-    var accessToken = uuid.v4()
+    const accessToken = uuid.v4()
 
     user = new User({
       nickname: '小狗狗',
@@ -62,10 +61,10 @@ exports.signup = async (ctx, next) => {
 }
 
 exports.verify = async (ctx, next) => {
-  var verifyCode = ctx.request.body.verifyCode
-  var phoneNumber = ctx.request.body.phoneNumber
+  const verifyCode = ctx.request.body.verifyCode
+  const phoneNumber = ctx.request.body.phoneNumber
 
-  var user = await User.findOne({
+  let user = await User.findOne({
     phoneNumber: phoneNumber,
     verifyCode: verifyCode
   }).exec()
@@ -86,15 +85,14 @@ exports.verify = async (ctx, next) => {
       success: false,
       err: '验证码错误'
     }
-    return
   }
 }
 
 exports.update = async (ctx, next) => {
-  var body = ctx.request.body
-  var user = ctx.session.user
+  const body = ctx.request.body
+  let user = ctx.session.user
 
-  var fields = 'avatar,gender,age,nickname,breed'.split(',')
+  const fields = 'avatar,gender,age,nickname,breed'.split(',')
 
   fields.forEach((field) => {
     if (body[field]) {

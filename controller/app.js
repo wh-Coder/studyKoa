@@ -11,7 +11,7 @@ exports.signature = (ctx) => {
 }
 
 exports.hasBody = async (ctx, next) => {
-  var body = ctx.request.body || {}
+  const body = ctx.request.body || {}
   if (Object.keys(body).length === 0) {
     ctx.body = {
       success: false,
@@ -23,7 +23,7 @@ exports.hasBody = async (ctx, next) => {
 }
 
 exports.hasToken = async (ctx, next) => {
-  var accessToken = ctx.query.accessToken
+  let accessToken = ctx.query.accessToken
 
   if (!accessToken) {
     accessToken = ctx.request.body.accessToken
@@ -37,7 +37,7 @@ exports.hasToken = async (ctx, next) => {
     return
   }
 
-  var user = await User.findOne({
+  let user = await User.findOne({
     accessToken: accessToken
   }).exec()
 
