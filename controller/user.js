@@ -57,7 +57,7 @@ exports.vertify = function *() {
   var phoneNumber = this.request.body.phoneNumber
   var vertifyCode = this.request.body.vertifyCode
 
-  var user = User.findOne({
+  var user = yield User.findOne({
     phoneNumber: phoneNumber,
     verifyCode: vertifyCode
   })
@@ -86,8 +86,18 @@ exports.vertify = function *() {
 
 }
 
-exports.update = function () {
-  var body = this.request.body
+exports.update = function *() {
+  var user = this.session.user
+
+  const fields = 'avatar,gender,age,nickname,breed'.split(',')
+
+  fields.forEach((field) => {
+    if (body[field]) {
+      user[field] = body[field]
+    }
+  })
+
+  user = yield user.save()
 
 
   this.body = {
