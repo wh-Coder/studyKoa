@@ -13,7 +13,7 @@ exports.signup = function *() {
 
   var user = yield User.findOne({
     phoneNumber: phoneNumber
-  })
+  }).exec()
 
   var verifyCode = sms.getCode()
 
@@ -65,7 +65,7 @@ exports.verify = function *() {
   var user = yield User.findOne({
     phoneNumber: phoneNumber,
     verifyCode: verifyCode
-  })
+  }).exec()
 
   if (user) {
     user.verifed = true
