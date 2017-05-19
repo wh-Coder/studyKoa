@@ -12,12 +12,13 @@ exports.hasBody = function *(next) {
       success : false,
       err: '参数不能为空'
     }
+    return
   }
   yield next
 }
 
 
-exports.hasToken = function *() {
+exports.hasToken = function *(next) {
   let accessToken = this.query.accessToken
 
   if (!accessToken) {

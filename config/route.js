@@ -11,9 +11,9 @@ module.exports = function () {
     prefix: '/api/v1'
   })
 
-  router.get('/signup', App.hasBody, User.signup)
-  router.get('/vertify', App.hasBody, User.vertify)
-  router.get('/update', App.hasBody, App.hasToken, User.update)
+  router.post('/u/signup', App.hasBody, User.signup)
+  router.post('/u/verify', App.hasBody, User.verify)
+  router.post('/u/update', App.hasBody, App.hasToken, User.update)
 
   return router
 }

@@ -9,16 +9,16 @@ var uuid = require('uuid')
 
 exports.signup = function *() {
   var that = this
-  var phoneNumber = this.query.phoneNumber
+  var phoneNumber = this.request.body.phoneNumber
 
-  var user = User.findOne({
+  var user = yield User.findOne({
     phoneNumber: phoneNumber
   })
 
-  var vertifyCode = sms.getCode()
+  var verifyCode = sms.getCode()
 
   if (user) {
-    user.verifyCode = vertifyCode
+    user.verifyCode = verifyCode
   } else {
     var accessToken = uuid.v4()
     user = new User({
@@ -35,15 +35,19 @@ exports.signup = function *() {
       success: false,
       err: '用户保存失败'
     }
+    return
   }
 
   try {
-    sms.sendCode(phoneNumber, vertifyCode)
+    // sms.sendCode(phoneNumber, verifyCode)
+    console.log(verifyCode)
+    console.log(phoneNumber)
   } catch (e) {
     that.body = {
       success: false,
       err: '验证码发送失败'
     }
+    return
   }
 
 
@@ -52,14 +56,14 @@ exports.signup = function *() {
   }
 }
 
-exports.vertify = function *() {
+exports.verify = function *() {
   var that = this
   var phoneNumber = this.request.body.phoneNumber
-  var vertifyCode = this.request.body.vertifyCode
+  var verifyCode = this.request.body.verifyCode
 
   var user = yield User.findOne({
     phoneNumber: phoneNumber,
-    verifyCode: vertifyCode
+    verifyCode: verifyCode
   })
 
   if (user) {
@@ -69,6 +73,7 @@ exports.vertify = function *() {
       success: false,
       err: '验证码错误'
     }
+    return
   }
 
   try {
@@ -78,6 +83,7 @@ exports.vertify = function *() {
       success: false,
       err: '数据保存失败'
     }
+    return
   }
 
   this.body = {
@@ -88,6 +94,7 @@ exports.vertify = function *() {
 
 exports.update = function *() {
   var user = this.session.user
+  var body = this.request.body
 
   const fields = 'avatar,gender,age,nickname,breed'.split(',')
 
@@ -97,7 +104,15 @@ exports.update = function *() {
     }
   })
 
-  user = yield user.save()
+  try {
+    user = yield user.save()
+  } catch (e) {
+    that.body = {
+      success: false,
+      err: '数据保存失败'
+    }
+    return
+  }
 
 
   this.body = {

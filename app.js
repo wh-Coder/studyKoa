@@ -14,6 +14,7 @@ var bodyParser = require('koa-bodyparser')
 
 var app = koa()
 
+app.keys = ['hello']
 app.use(logger())
 app.use(session(app))
 app.use(bodyParser())

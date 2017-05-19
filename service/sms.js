@@ -3,12 +3,15 @@
  */
 var speakeasy = require('speakeasy')
 var Promise = require('bluebird')
+var https = require('https');
+var querystring = require('querystring');
 
 exports.getCode = function () {
   var code = speakeasy.totp({
     secret: 'hello',
     digits: 4
   })
+  return code
 }
 
 exports.sendCode = (phoneNumber, msg) => {
