@@ -12,7 +12,6 @@ exports.signup = function *() {
 
   user = yield user.save()
 
-  console.log(user)
   this.body = {
     success: true
   }

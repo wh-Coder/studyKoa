@@ -2,9 +2,8 @@
  * Created by Administrator on 2017-05-17.
  */
 var mongodb = 'mongodb://localhost/koa1'
-var Promise = require("bluebird");
-var mongoose = Promise.promisifyAll(require("mongoose"))
-
+var mongoose = require("mongoose")
+mongoose.Promise = require('bluebird')
 mongoose.connect(mongodb)
 require('./models/user')
 

@@ -4,8 +4,12 @@
 var mongoose = require('mongoose')
 
 var UserSchema = new mongoose.Schema({
-  phoneNumber: String,
-  vertifyCode: String
+  phoneNumber: {
+    unique: true,
+    type: String
+  },
+  vertifyCode: String,
+  nickname: String
 })
 
 module.exports = mongoose.model('User', UserSchema)
