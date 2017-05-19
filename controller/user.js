@@ -1,8 +1,8 @@
 /**
  * Created by Administrator on 2017-05-19.
  */
-var User = require('../models/user')
-
+var mongoose = require('mongoose')
+var User = mongoose.model('User')
 exports.signup = function *() {
   var phoneNumber = this.query.phoneNumber
 

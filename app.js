@@ -1,9 +1,12 @@
 /**
  * Created by Administrator on 2017-05-17.
  */
-var mongoose = require('mongoose')
 var mongodb = 'mongodb://localhost/koa1'
+var Promise = require("bluebird");
+var mongoose = Promise.promisifyAll(require("mongoose"))
+
 mongoose.connect(mongodb)
+require('./models/user')
 
 var koa = require('koa')
 var session = require('koa-session')
