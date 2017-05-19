@@ -12,10 +12,12 @@ const koa = require('koa')
 const session = require('koa-session')
 const logger = require('koa-logger')
 const bodyParser = require('koa-bodyparser')
+const cors = require('koa-cors')
 
 const app = new koa()
 
 app.keys = ['hello']
+app.use(cors());
 app.use(logger())
 app.use(session(app))
 app.use(bodyParser())

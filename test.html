@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+<h1>signup</h1>
+<div id="signup">
+    <h1>signup</h1>
+    phoenNumber: <input type="text" name="phoneNumber"/>
+    <input type="button" value="signup"/>
+</div>
+<br/>
+<div id="verify">
+    <h1>verify</h1>
+    phoneNumber: <input type="text" name="phoneNumber"/><br/>
+    verify: <input type="text" name="verify"/>
+    <input type="button" value="verify"/>
+</div>
+<br/>
+<div id="update">
+    <h1>update</h1>
+    accessToken: <input type="text" name="accessToken"/><br/>
+    nickname: <input type="text" name="nickname"/>
+    <input type="button" value="update"/>
+</div>
+</body>
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    var signup = $('#signup')
+    var phoneNumber = signup.find("input[name='phoneNumber']")
+    var button = signup.find("input[value='signup']")
+
+    button.on('click',function (e) {
+      var value = phoneNumber[0].value
+      $.post('http://192.168.1.7:3000/api/v1/u/signup',{
+        phoneNumber: value
+      },function (res) {
+        console.log(res);
+      })
+    })
+
+    var verify = $('#verify')
+    var phoneNumber2 = verify.find("input[name='phoneNumber']")
+    var verifyText = verify.find("input[name='verify']")
+    var button2 = verify.find("input[value='verify']")
+
+    button2.on('click',function (e) {
+      $.post('http://192.168.1.7:3000/api/v1/u/verify',{
+        phoneNumber: phoneNumber2[0].value,
+        verifyCode: verifyText[0].value
+      },function (res) {
+        console.log(res);
+      })
+    })
+
+    var update = $('#update')
+    var accessToken = update.find("input[name='accessToken']")
+    var nickname = update.find("input[name='nickname']")
+    var button3 = update.find("input[value='update']")
+
+    button3.on('click',function (e) {
+      $.post('http://192.168.1.7:3000/api/v1/u/update',{
+        accessToken: accessToken[0].value,
+        nickname: nickname[0].value
+      },function (res) {
+        console.log(res);
+      })
+    })
+</script>
+</html>

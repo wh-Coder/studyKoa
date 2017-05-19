@@ -8,9 +8,11 @@ const uuid = require('uuid')
 const sms = require('../service/sms')
 
 exports.test = (ctx) => {
-  ctx.body = {
-    success: true
-  }
+  // ctx.session = {
+  //   id: '123',
+  //   success: true
+  // }
+  ctx.body = ctx.session
 }
 
 exports.signup = async (ctx, next) => {
@@ -46,7 +48,8 @@ exports.signup = async (ctx, next) => {
   }
 
   try {
-    sms.send(user.phoneNumber, verifyCode)
+    // sms.send(user.phoneNumber, verifyCode
+    console.log('验证码：' + verifyCode + '【繁忙的耗子】')
   } catch (e) {
     ctx.body = {
       success: false,
@@ -80,7 +83,7 @@ exports.verify = async (ctx, next) => {
         accessToken: user.accessToken
       }
     }
-  }else {
+  } else {
     ctx.body = {
       success: false,
       err: '验证码错误'
