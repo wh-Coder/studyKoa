@@ -24,7 +24,8 @@ exports.signup = function *() {
     user = new User({
       phoneNumber: phoneNumber,
       accessToken: accessToken,
-      nick: '哈哈哈'
+      verifyCode: verifyCode,
+      nickname: '哈哈哈'
     })
   }
 

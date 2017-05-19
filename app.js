@@ -4,7 +4,7 @@
 var mongodb = 'mongodb://localhost/koa1'
 var mongoose = require("mongoose")
 mongoose.Promise = require('bluebird')
-mongoose.connect(mongodb)
+mongoose.connect(mongodb).then(console.log('mongoo connected'))
 require('./models/user')
 
 var koa = require('koa')
