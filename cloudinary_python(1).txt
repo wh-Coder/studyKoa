@@ -1,0 +1,19 @@
+# Cloudinary settings for Django. Add to your settings file.
+CLOUDINARY = {
+  'cloud_name': 'busyrat',  
+  'api_key': '385948557283994',  
+  'api_secret': 'Wqo_JxZki9OQTnQklQjgJ0IPIbw',  
+}
+
+# Cloudinary settings using environment variables. Add to your .bashrc
+export CLOUDINARY_CLOUD_NAME="busyrat"  
+export CLOUDINARY_API_KEY="385948557283994"  
+export CLOUDINARY_API_SECRET="Wqo_JxZki9OQTnQklQjgJ0IPIbw"  
+
+# Cloudinary settings using python code. Run before pycloudinary is used.
+import pycloudinary
+pycloudinary.config(
+  cloud_name = 'busyrat',  
+  api_key = '385948557283994',  
+  api_secret = 'Wqo_JxZki9OQTnQklQjgJ0IPIbw'  
+)
