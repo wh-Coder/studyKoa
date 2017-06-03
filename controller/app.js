@@ -3,33 +3,22 @@
  */
 const mongoose = require('mongoose')
 const User = mongoose.model('User')
-const sha1 = require('sha1')
-const config = require('../config/config')
+const robot = require('../service/robot')
 
 exports.signature = (ctx) => {
   let body = this.request.body
-  let type = body.type
-  let timestamp = body.timestamp
-  let folder
-  let tags
+  let key = body.key
+  let token
 
-  if(type === 'avatar'){
-    folder = 'avatar'
-    tags = 'app,avatar'
-  }else if(type === 'video'){
-    folder = 'video'
-    tags = 'app,video'
-  }else if(type === 'audio'){
-    folder = 'audio'
-    tags = 'app,audio'
+  if (key) {
+    token = robot.getQiniuToken(key)
+  } else {
+    token = robot.getCloudinaryToken(body)
   }
-  let signature = 'folder=' + folder + '&tags=' + tags + '&timestamp=' + timestamp + config.CLOUDINARY.api_secret
-
-  signature = sha1(signature)
 
   ctx.body = {
     success: true,
-    data: signature
+    data: token
   }
 }
 

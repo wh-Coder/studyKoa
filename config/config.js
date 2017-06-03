@@ -4,6 +4,10 @@
 'use strict'
 
 module.exports = {
+  qiniu: {
+    AK: '',
+    SK: ''
+  },
   CLOUDINARY: {
     'cloud_name': 'busyrat',
     'api_key': '385948557283994',
