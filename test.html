@@ -34,7 +34,7 @@
 
     button.on('click',function (e) {
       var value = phoneNumber[0].value
-      $.post('http://192.168.1.7:3000/api/v1/u/signup',{
+      $.post('http://192.168.1.7:3000/api/u/signup',{
         phoneNumber: value
       },function (res) {
         console.log(res);
@@ -47,7 +47,7 @@
     var button2 = verify.find("input[value='verify']")
 
     button2.on('click',function (e) {
-      $.post('http://192.168.1.7:3000/api/v1/u/verify',{
+      $.post('http://192.168.1.7:3000/api/u/verify',{
         phoneNumber: phoneNumber2[0].value,
         verifyCode: verifyText[0].value
       },function (res) {
@@ -61,7 +61,7 @@
     var button3 = update.find("input[value='update']")
 
     button3.on('click',function (e) {
-      $.post('http://192.168.1.7:3000/api/v1/u/update',{
+      $.post('http://192.168.1.7:3000/api/u/update',{
         accessToken: accessToken[0].value,
         nickname: nickname[0].value
       },function (res) {

@@ -7,7 +7,7 @@ const App = require('../controller/app')
 
 module.exports = () => {
   let router = new Router({
-    prefix: '/api/v1'
+    prefix: '/api'
   })
 
   // test

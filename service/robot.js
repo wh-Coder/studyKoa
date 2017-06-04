@@ -5,7 +5,7 @@
 
 const qiniu = require('qiniu')
 const sha1 = require('sha1')
-const config = require('../../config')
+const config = require('../config/config')
 // https://developer.qiniu.com/kodo/sdk/1289/nodejs
 qiniu.conf.ACCESS_KEY = config.qiniu.AK
 qiniu.conf.SECRET_KEY = config.qiniu.SK

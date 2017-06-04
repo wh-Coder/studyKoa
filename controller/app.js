@@ -4,13 +4,16 @@
 const mongoose = require('mongoose')
 const User = mongoose.model('User')
 const robot = require('../service/robot')
+const uuid = require('uuid')
 
 exports.signature = (ctx) => {
-  let body = this.request.body
-  let key = body.key
+  let body = ctx.request.body
+  let cloud = body.cloud
   let token
+  let key
 
-  if (key) {
+  if (cloud == 'qiniu') {
+    key = uuid.v4() + '.jpeg';
     token = robot.getQiniuToken(key)
   } else {
     token = robot.getCloudinaryToken(body)
@@ -18,7 +21,10 @@ exports.signature = (ctx) => {
 
   ctx.body = {
     success: true,
-    data: token
+    data: {
+      token: token,
+      key: key
+    }
   }
 }
 
