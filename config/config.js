@@ -5,6 +5,7 @@
 
 module.exports = {
   qiniu: {
+    video: 'http://or0vd5een.bkt.clouddn.com/',
     AK: 'y1kd7ktavxRFZa-gOoPujEOdoeLgIYAPyrsSLGht',
     SK: 'CqypOZU6_0nxDkdYauzrmre8egv_kE6YCw4Fc_ZB'
   },

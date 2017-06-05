@@ -6,7 +6,7 @@ const db = 'mongodb://localhost/koa'
 mongoose.Promise = require('bluebird')
 mongoose.connect(db)
 require('./models/user')
-// require('./app/models/user')
+require('./models/video')
 
 const koa = require('koa')
 const session = require('koa-session')

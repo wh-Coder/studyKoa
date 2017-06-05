@@ -4,6 +4,7 @@
 const Router = require('koa-router')
 const User = require('../controller/user')
 const App = require('../controller/app')
+const Creation = require('../controller/creation')
 
 module.exports = () => {
   let router = new Router({
@@ -20,6 +21,8 @@ module.exports = () => {
 
   // app
   router.post('/signature', App.hasBody, App.hasToken, App.signature)
+  router.post('/creations/video', App.hasBody, App.hasToken, Creation.video)
+
 
   return router
 }
